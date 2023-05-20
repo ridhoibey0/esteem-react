@@ -1,3 +1,7 @@
 export const colors = {
-  base: "#0909",
+  base: "#fff",
+  primary: "#BF080A",
+  secondary: "#CCCCCC",
+  background: "#ffffff",
+  textDark: "#888888",
 };
