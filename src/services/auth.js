@@ -1,15 +1,12 @@
-import { http } from "@/lib";
+import axios from "./axios";
 
-export const auth = {
-  login: async (username, password) => {
-    const { data } = await http("post", {
-      url: "/login",
-      data: {
-        username,
-        password,
-      },
-    });
+export const authLogin = (nis, password) => {
+  return axios.post("/login", {
+    nis,
+    password,
+  });
+};
 
-    return data;
-  },
+export const logout = () => {
+  return localStorage.clear();
 };

@@ -1,140 +1,157 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Flex, FormControl, FormLabel, Input, Image, Select, Button } from '@chakra-ui/react';
-
+import React, { useEffect, useState } from "react";
+import {
+  Box,
+  Flex,
+  FormControl,
+  FormLabel,
+  Input,
+  Image,
+  Select,
+  Button,
+  Alert,
+  AlertIcon,
+} from "@chakra-ui/react";
 
 import Logo from "@/assets/img/logo.png";
 import Main from "@/assets/img/login.png";
 
+import { authLogin } from "@/services";
+import { redirect, useNavigate } from "react-router-dom";
+
 const Login = () => {
-    const [users, setUsers] = useState();
-
-
-    // Function to collect data
-    const getApiData = async () => {
-      const response = await fetch(
-        "http://localhost:9000/students"
-      ).then((response) => response.json())
-  
-      setUsers(response.results);
-    };
-  
-    useEffect(() => {
-      getApiData([]);
-    }, []);
-
+  const [nis, setNis] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const response = await authLogin(nis, password);
+      localStorage.setItem("token", response.data.token);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      setError(true);
+      setLoading(false);
+      setMessage(error.response.data.message);
+    }
+  };
   return (
-    <Box
-    bgColor="secondary"
-    fontFamily="mukta"
-    >
-        <Box 
+    <Box bgColor="secondary" fontFamily="mukta">
+      <Box
         maxW="540px"
         minH="100vh"
         margin="auto"
         backgroundColor="background"
-        position="relative"  
+        position="relative"
+      >
+        <Flex
+          p="3rem 0"
+          backgrounColor="background"
+          display="flex"
+          alignItems="center"
+          justify="center"
         >
-            <Flex
-            p="3rem 0"
-            backgrounColor="background"
+          <Flex
             display="flex"
             alignItems="center"
-            justify="center"
-            >
-                <Flex
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                paddingBottom="2px"
-                >
-                    <Image 
-                    src={Logo} 
-                    alt="" 
-                    srcset="" 
-                    />
-                </Flex>
-            </Flex>
-            <Flex
-            p="3rem 0"
-            backgrounColor="background"
+            justifyContent="center"
+            paddingBottom="2px"
+          >
+            <Image src={Logo} alt="" srcset="" />
+          </Flex>
+        </Flex>
+        <Flex
+          p="3rem 0"
+          backgrounColor="background"
+          display="flex"
+          alignItems="center"
+          justify="center"
+        >
+          <Flex
             display="flex"
             alignItems="center"
-            justify="center"
+            justifyContent="center"
+            paddingBottom="2px"
+          >
+            <Image src={Main} alt="" srcset="" />
+          </Flex>
+        </Flex>
+        <Flex
+          backgroundColor="background"
+          fontSize="1rem"
+          fontWeight="700"
+          pb="3rem"
+        >
+          <form onSubmit={handleLogin} style={{ width: "90%" }}>
+            <FormControl
+              id="form_Form"
+              display="grid"
+              rowGap="24px"
+              margin="0px 24px"
+              isRequired
             >
-                <Flex
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                paddingBottom="2px"
-                >
-                    <Image 
-                    src={Main} 
-                    alt="" 
-                    srcset="" 
-                    />
-                </Flex>
-            </Flex>
-            <Flex
-            backgroundColor="background"
-            fontSize="1rem"
-            fontWeight="700"
-            pb="3rem"
-            >
-                <FormControl 
-                id="form_Form" 
-                display="grid"
-                rowGap="24px"
-                margin="0px 24px"
-                >
-                    <Box>
-                        <FormLabel>Username</FormLabel>
-                        <Select 
-                        name="username" 
-                        id="username_id"
-                        className='theSelect'
-                        width="100%"
-                        background="#FFFFFF"
-                        border="1px solid #CCCCCC"
-                        borderRadius="8px"
-                        height="3rem"
-                        focusBorderColor='black'
-                        mode="multiple"
-                        >
-                            <option value="" disable selected hidden>Pilih salah satu</option>
-                            {users && 
-                            users.map((user) => (
-                                <option value = {user.nis}>{user.nis}    -   {user.nama}</option>
-                            ))};
-                        </Select>
-                    </Box>
-                    <Box>
-                        <FormLabel>Password</FormLabel>
-                        <Input 
-                        class="Input" 
-                        id="password_id"
-                        placeholder='Masukkan Password'
-                        type="password"
-                        width="100%"
-                        background="#FFFFFF"
-                        border="1px solid #CCCCCC"
-                        borderRadius="8px"
-                        height="3rem"
-                        focusBorderColor='black'
-                        />
-                    </Box>
-                    <Box>
-                        <Button
-                        type="submit" 
-                        variant="primary"
-                        >
-                            Login
-                        </Button> 
-                    </Box>
-                </FormControl>
-            </Flex>
-        </Box>
+              {error ? (
+                <Alert status="error">
+                  <AlertIcon />
+                  {message}
+                </Alert>
+              ) : (
+                ""
+              )}
+              <Box>
+                <FormLabel>Nis</FormLabel>
+                <Input
+                  className="Input"
+                  type="number"
+                  placeholder="Masukan nis"
+                  width="100%"
+                  background="#FFFFFF"
+                  border="1px solid #CCCCCC"
+                  borderRadius="8px"
+                  height="3rem"
+                  w="100%"
+                  focusBorderColor="black"
+                  value={nis}
+                  onChange={(e) => setNis(e.target.value)}
+                />
+              </Box>
+              <Box>
+                <FormLabel>Password</FormLabel>
+                <Input
+                  className="Input"
+                  placeholder="Masukkan Password"
+                  type="password"
+                  width="100%"
+                  background="#FFFFFF"
+                  border="1px solid #CCCCCC"
+                  borderRadius="8px"
+                  height="3rem"
+                  focusBorderColor="black"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </Box>
+              <Box>
+                {loading ? (
+                  <Button isLoading variant="primary">
+                    Login
+                  </Button>
+                ) : (
+                  <Button variant="primary" type="submit">
+                    Login
+                  </Button>
+                )}
+              </Box>
+            </FormControl>
+          </form>
+        </Flex>
+      </Box>
     </Box>
-  )
-}
+  );
+};
 
 export default Login;

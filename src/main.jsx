@@ -4,6 +4,7 @@ import ReactDOM from "react-dom/client";
 
 import { RouterProvider } from "react-router-dom";
 import { router } from "./router";
+import useUserStore from "@/store/userStore";
 import themes from "./themes";
 
 ReactDOM.createRoot(document.getElementById("root")).render(

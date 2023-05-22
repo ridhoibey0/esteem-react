@@ -6,6 +6,7 @@ import Login from "@/pages/login";
 import History from "@/pages/history";
 
 import { createBrowserRouter } from "react-router-dom";
+import Absen from "@/pages/absen";
 
 export const router = createBrowserRouter([
   {
@@ -31,5 +32,9 @@ export const router = createBrowserRouter([
   {
     path: "/history",
     element: <History />,
+  },
+  {
+    path: "/presensi",
+    element: <Absen />,
   },
 ]);
