@@ -52,12 +52,12 @@ const Profile = () => {
                   maxW="125px"
                   rounded="full"
                 />
-                <Text margin="0" fontSize="16px" fontWeight="700">
+                <Text margin="0" fontSize="lg" fontWeight="700">
                   {user.nama}
                 </Text>
                 <Text
                   margin="0"
-                  fontSize="12px"
+                  fontSize="sm"
                   fontWeight="400"
                   color="secondary"
                 >

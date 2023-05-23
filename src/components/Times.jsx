@@ -84,10 +84,10 @@ export const Times = () => {
           <Icon as={HiMapPin} boxSize="24px" color="primary" />
         </Flex>
         <Flex display="block">
-          <Text fontSize="10px" fontWeight="400" mb="-5px">
+          <Text fontSize="xs" fontWeight="400" mb="-5px">
             {distance} Meter
           </Text>
-          <Text fontSize="12px" fontWeight="700">
+          <Text fontSize="sm" fontWeight="700">
             {distance <= maxDistance ? "Di dalam sekolah" : "Di Luar sekolah"}
           </Text>
         </Flex>
@@ -97,10 +97,10 @@ export const Times = () => {
           <Icon as={HiClock} boxSize="26px" />
         </Flex>
         <Flex display="block">
-          <Text fontSize="10px" fontWeight="400" mb="-5px">
+          <Text fontSize="xs" fontWeight="400" mb="-5px">
             {myDay[day]}
           </Text>
-          <Text fontSize="12px" fontWeight="700">
+          <Text fontSize="sm" fontWeight="700">
             {hours} : {minute}
           </Text>
         </Flex>

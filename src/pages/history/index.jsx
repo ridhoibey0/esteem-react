@@ -32,7 +32,7 @@ const History = () => {
           <Link to="/" boxSize="16px">
             <Icon as={BiArrowBack} boxSize="16px" />
           </Link>
-          <Heading fontSize="16px" fontWeight="700" ml="28px">
+          <Heading fontSize="lg" fontWeight="700" ml="28px">
             History Presensi
           </Heading>
         </Flex>
@@ -52,7 +52,7 @@ const History = () => {
                 justify="space-between"
               >
                 <Flex margin="0px 24px" mb="0" padding="0" align="end">
-                  <Text fontSize="14px" color="textDark">
+                  <Text fontSize="md" color="textDark">
                     {formatDate(ul.tanggal_masuk)}
                   </Text>
                 </Flex>
@@ -67,7 +67,7 @@ const History = () => {
                     <Text
                       color="primary"
                       margin="0"
-                      fontSize="14px"
+                      fontSize="md"
                       fontWeight="700"
                     >
                       Waktu Masuk
@@ -75,12 +75,12 @@ const History = () => {
                     <Text
                       color="black"
                       margin="0"
-                      fontSize="14px"
+                      fontSize="md"
                       fontWeight="700"
                     >
                       {ul.waktu_masuk}
                     </Text>
-                    <Text fontSize="14px" color="textDark">
+                    <Text fontSize="md" color="textDark">
                       {ul.status}
                     </Text>
                   </Box>
@@ -89,7 +89,7 @@ const History = () => {
                       as={IoIosRemove}
                       color="primary"
                       margin="0"
-                      fontSize="14px"
+                      fontSize="md"
                       alignSelf="center"
                       fontWeight="700"
                     />
@@ -98,7 +98,7 @@ const History = () => {
                     <Text
                       color="primary"
                       margin="0"
-                      fontSize="14px"
+                      fontSize="md"
                       fontWeight="700"
                     >
                       Waktu Pulang
@@ -106,7 +106,7 @@ const History = () => {
                     <Text
                       color="black"
                       margin="0"
-                      fontSize="14px"
+                      fontSize="md"
                       fontWeight="700"
                     >
                       {ul.waktu_pulang !== null ? (
@@ -116,13 +116,13 @@ const History = () => {
                           as={IoIosRemove}
                           color="primary"
                           margin="0"
-                          fontSize="14px"
+                          fontSize="md"
                           alignSelf="center"
                           fontWeight="700"
                         />
                       )}
                     </Text>
-                    <Text fontSize="14px" color="textDark">
+                    <Text fontSize="md" color="textDark">
                       {ul.waktu_pulang == null
                         ? "Belum Absen Pulang"
                         : "Sudah absen pulang"}
