@@ -12,7 +12,7 @@ export const Navbar = () => {
       justify="space-between"
       backgroundColor="background"
       fontWeight="700"
-      fontSize="12px"
+      fontSize="sm"
       fontFamily="mukta"
       color="secondary"
       position="fixed"

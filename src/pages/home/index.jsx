@@ -70,14 +70,14 @@ const Home = () => {
               )}
             </Flex>
             <Flex display="grid">
-              <Text margin="0" fontSize="14px" fontWeight="700">
+              <Text margin="0" fontSize="md" fontWeight="700">
                 {user ? (
                   user.nama
                 ) : (
                   <Skeleton w="120px" h="20px" borderRadius="0.25rem" />
                 )}
               </Text>
-              <Text margin="0" fontSize="12px" color="textDark">
+              <Text margin="0" fontSize="sm" color="textDark">
                 {user ? (
                   `${user.kelas} ${user.jurusan}`
                 ) : (
@@ -102,7 +102,7 @@ const Home = () => {
               >
                 <Icon as={IoMdLogIn} boxSize="44px" />
               </Flex>
-              <Text fontSize="14px">Presensi Masuk</Text>
+              <Text fontSize="md">Presensi Masuk</Text>
             </VStack>
             <VStack>
               <Flex
@@ -113,7 +113,7 @@ const Home = () => {
               >
                 <Icon as={IoMdLogOut} boxSize="44px" />
               </Flex>
-              <Text fontSize="14px">Presensi Pulang</Text>
+              <Text fontSize="md">Presensi Pulang</Text>
             </VStack>
           </Flex>
           <Box
@@ -123,7 +123,7 @@ const Home = () => {
             backgroundColor="background"
           >
             <Flex justify="space-between" display="flex" mb="24px">
-              <Text fontSize="16px" fontWeight="700">
+              <Text fontSize="lg" fontWeight="700">
                 Histori Presensi
               </Text>
               <Link
@@ -131,7 +131,7 @@ const Home = () => {
                 textDecorationLine="none"
                 color="primary"
                 fontWeight="700"
-                fontSize="16px"
+                fontSize="lg"
                 textAlign="center"
               >
                 Lihat semua
@@ -153,7 +153,7 @@ const Home = () => {
                   justify="space-between"
                 >
                   <Flex margin="0px 24px" mb="0" padding="0" align="end">
-                    <Text fontSize="14px" color="textDark">
+                    <Text fontSize="md" color="textDark">
                       {formatDate(ul.tanggal_masuk)}
                     </Text>
                   </Flex>
@@ -168,7 +168,7 @@ const Home = () => {
                       <Text
                         color="primary"
                         margin="0"
-                        fontSize="14px"
+                        fontSize="md"
                         fontWeight="700"
                       >
                         Waktu Masuk
@@ -176,12 +176,12 @@ const Home = () => {
                       <Text
                         color="black"
                         margin="0"
-                        fontSize="14px"
+                        fontSize="md"
                         fontWeight="700"
                       >
                         {ul.waktu_masuk}
                       </Text>
-                      <Text fontSize="14px" color="textDark">
+                      <Text fontSize="md" color="textDark">
                         {ul.status}
                       </Text>
                     </Box>
@@ -190,7 +190,7 @@ const Home = () => {
                         as={IoIosRemove}
                         color="primary"
                         margin="0"
-                        fontSize="14px"
+                        fontSize="md"
                         alignSelf="center"
                         fontWeight="700"
                       />
@@ -199,7 +199,7 @@ const Home = () => {
                       <Text
                         color="primary"
                         margin="0"
-                        fontSize="14px"
+                        fontSize="md"
                         fontWeight="700"
                       >
                         Waktu Pulang
@@ -207,7 +207,7 @@ const Home = () => {
                       <Text
                         color="black"
                         margin="0"
-                        fontSize="14px"
+                        fontSize="md"
                         fontWeight="700"
                       >
                         {ul.waktu_pulang !== null ? (
@@ -217,13 +217,13 @@ const Home = () => {
                             as={IoIosRemove}
                             color="primary"
                             margin="0"
-                            fontSize="14px"
+                            fontSize="md"
                             alignSelf="center"
                             fontWeight="700"
                           />
                         )}
                       </Text>
-                      <Text fontSize="14px" color="textDark">
+                      <Text fontSize="md" color="textDark">
                         {ul.waktu_pulang == null
                           ? "Belum Absen Pulang"
                           : "Sudah absen pulang"}

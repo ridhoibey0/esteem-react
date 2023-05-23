@@ -13,4 +13,7 @@ export const buttonStyled = {
                 },
             },
         },
+        defaultProps: {
+            variant: "primary"
+        }
     }

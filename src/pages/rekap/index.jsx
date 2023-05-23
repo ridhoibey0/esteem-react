@@ -60,7 +60,7 @@ const Rekap = () => {
                   >
                     <Flex display="flex" alignItems="center">
                       <Image src={Calendar} alt="" width="16px" height="16px" />
-                      <Text fontSize="12px" margin="0" ml="8px">
+                      <Text fontSize="sm" margin="0" ml="8px">
                         {formatDate(ul.tanggal_masuk)}
                       </Text>
                     </Flex>
@@ -71,7 +71,7 @@ const Rekap = () => {
                       fontWeight="700"
                     >
                       <Image src={Clock} alt="" width="16px" height="16px" />
-                      <Text fontSize="12px" margin="0" ml="8px">
+                      <Text fontSize="sm" margin="0" ml="8px">
                         {/* {ul.ket} */}
                         Hadir
                       </Text>
@@ -79,7 +79,7 @@ const Rekap = () => {
                   </Flex>
                   <Flex>
                     <Image src={Clock2} alt="" width="16px" height="16px" />
-                    <Text fontSize="12px" margin="0" ml="8px">
+                    <Text fontSize="sm" margin="0" ml="8px">
                       {ul.waktu_masuk}
                     </Text>
                   </Flex>
@@ -110,7 +110,7 @@ const Rekap = () => {
                           width="16px"
                           height="16px"
                         />
-                        <Text fontSize="12px" margin="0" ml="8px">
+                        <Text fontSize="sm" margin="0" ml="8px">
                           {formatDate(ul.tanggal_pulang)}
                         </Text>
                       </Flex>
@@ -121,7 +121,7 @@ const Rekap = () => {
                         fontWeight="700"
                       >
                         <Image src={Clock} alt="" width="16px" height="16px" />
-                        <Text fontSize="12px" margin="0" ml="8px">
+                        <Text fontSize="sm" margin="0" ml="8px">
                           {/* {ul.ket} */}
                           Pulang
                         </Text>
@@ -129,7 +129,7 @@ const Rekap = () => {
                     </Flex>
                     <Flex>
                       <Image src={Clock2} alt="" width="16px" height="16px" />
-                      <Text fontSize="12px" margin="0" ml="8px">
+                      <Text fontSize="sm" margin="0" ml="8px">
                         {ul.waktu_pulang}
                       </Text>
                     </Flex>
