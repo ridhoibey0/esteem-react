@@ -7,23 +7,40 @@ import History from "@/pages/history";
 
 import { createBrowserRouter } from "react-router-dom";
 import Absen from "@/pages/absen";
+import Protected from "./ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: (
+      <Protected>
+        <Home />
+      </Protected>
+    ),
   },
   {
     path: "/about",
-    element: <About />,
+    element: (
+      <Protected>
+        <About />
+      </Protected>
+    ),
   },
   {
     path: "/profile",
-    element: <Profile />,
+    element: (
+      <Protected>
+        <Profile />
+      </Protected>
+    ),
   },
   {
     path: "/rekap",
-    element: <Rekap />,
+    element: (
+      <Protected>
+        <Rekap />
+      </Protected>
+    ),
   },
   {
     path: "/login",
@@ -31,10 +48,18 @@ export const router = createBrowserRouter([
   },
   {
     path: "/history",
-    element: <History />,
+    element: (
+      <Protected>
+        <History />
+      </Protected>
+    ),
   },
   {
     path: "/presensi",
-    element: <Absen />,
+    element: (
+      <Protected>
+        <Absen />
+      </Protected>
+    ),
   },
 ]);

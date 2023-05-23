@@ -38,6 +38,7 @@ const Rekap = () => {
             rekap.map((ul, li) => (
               <>
                 <Box
+                  key={ul.id}
                   display="grid"
                   gridTemplateColumns="56px 60% 40%"
                   alignItems="center"
