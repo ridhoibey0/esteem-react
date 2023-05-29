@@ -18,11 +18,14 @@ import { getAttendance, getUser } from "@/services";
 
 import { formatDate } from "@/utils/formatDate";
 import useUserStore from "@/store/userStore";
+import { formatTime } from "@/utils/formatTime";
 
 const Home = () => {
   const setUser = useUserStore((state) => state.setUser);
   const user = useUserStore((state) => state.user);
   const [historyAttendence, setHistory] = useState([]);
+  const [currentTime, setCurrentTime] = useState(new Date());
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -39,8 +42,15 @@ const Home = () => {
     fetchData();
   }, [getUser]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [currentTime]);
+
   return (
-    <Box bgColor="secondary" fontFamily="mukta">
+    <Box bgColor="secondary" fontFamily="mukta" overflow="hidden">
       <Box
         maxW="540px"
         minH="100vh"
@@ -64,7 +74,7 @@ const Home = () => {
           >
             <Flex display="inline" margin="0px 24px">
               {user ? (
-                <Image src={user.image} maxW="100px" alt="" />
+                <Image src={user.foto} maxW="100px" alt="" />
               ) : (
                 <Skeleton w="100px" h="100px" />
               )}
@@ -79,7 +89,7 @@ const Home = () => {
               </Text>
               <Text margin="0" fontSize="sm" color="textDark">
                 {user ? (
-                  `${user.kelas} ${user.jurusan}`
+                  `${user.tingkat} ${user.jurusan}`
                 ) : (
                   <Skeleton w="50px" mt="2px" h="16px" borderRadius="0.25rem" />
                 )}
@@ -94,25 +104,51 @@ const Home = () => {
             display="flex"
           >
             <VStack>
-              <Flex
-                p="22px"
-                bgColor="secondary"
-                borderRadius="8px"
-                color="textDark"
-              >
-                <Icon as={IoMdLogIn} boxSize="44px" />
-              </Flex>
+              {currentTime.getHours() <= 9 && currentTime.getHours() >= 6 ? (
+                <Link to="/presensi">
+                  <Flex
+                    p="22px"
+                    bgColor="#BF080A"
+                    borderRadius="8px"
+                    color="white"
+                  >
+                    <Icon as={IoMdLogIn} boxSize="44px" />
+                  </Flex>
+                </Link>
+              ) : (
+                <Flex
+                  p="22px"
+                  bgColor="secondary"
+                  borderRadius="8px"
+                  color="textDark"
+                >
+                  <Icon as={IoMdLogIn} boxSize="44px" />
+                </Flex>
+              )}
               <Text fontSize="md">Presensi Masuk</Text>
             </VStack>
             <VStack>
-              <Flex
-                p="23px"
-                bgColor="secondary"
-                borderRadius="8px"
-                color="textDark"
-              >
-                <Icon as={IoMdLogOut} boxSize="44px" />
-              </Flex>
+              {currentTime.getHours() >= 16 && currentTime.getHours() <= 19 ? (
+                <Link to="/presensi/out">
+                  <Flex
+                    p="23px"
+                    bgColor="#BF080A"
+                    borderRadius="8px"
+                    color="white"
+                  >
+                    <Icon as={IoMdLogOut} boxSize="44px" />
+                  </Flex>
+                </Link>
+              ) : (
+                <Flex
+                  p="23px"
+                  bgColor="secondary"
+                  borderRadius="8px"
+                  color="textDark"
+                >
+                  <Icon as={IoMdLogOut} boxSize="44px" />
+                </Flex>
+              )}
               <Text fontSize="md">Presensi Pulang</Text>
             </VStack>
           </Flex>
@@ -128,11 +164,9 @@ const Home = () => {
               </Text>
               <Link
                 to="/history"
-                textDecorationLine="none"
                 color="primary"
                 fontWeight="700"
                 fontSize="lg"
-                textAlign="center"
               >
                 Lihat semua
               </Link>
@@ -179,7 +213,7 @@ const Home = () => {
                         fontSize="md"
                         fontWeight="700"
                       >
-                        {ul.waktu_masuk}
+                        {formatTime(ul.jam_masuk)}
                       </Text>
                       <Text fontSize="md" color="textDark">
                         {ul.status}
@@ -210,8 +244,8 @@ const Home = () => {
                         fontSize="md"
                         fontWeight="700"
                       >
-                        {ul.waktu_pulang !== null ? (
-                          ul.waktu_pulang
+                        {ul.jam_pulang !== null ? (
+                          ul.jam_pulang
                         ) : (
                           <Icon
                             as={IoIosRemove}
@@ -224,7 +258,7 @@ const Home = () => {
                         )}
                       </Text>
                       <Text fontSize="md" color="textDark">
-                        {ul.waktu_pulang == null
+                        {ul.jam_pulang == null
                           ? "Belum Absen Pulang"
                           : "Sudah absen pulang"}
                       </Text>

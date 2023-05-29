@@ -8,6 +8,7 @@ import History from "@/pages/history";
 import { createBrowserRouter } from "react-router-dom";
 import Absen from "@/pages/absen";
 import Protected from "./ProtectedRoute";
+import AbsenOut from "@/pages/absen/out";
 
 export const router = createBrowserRouter([
   {
@@ -59,6 +60,14 @@ export const router = createBrowserRouter([
     element: (
       <Protected>
         <Absen />
+      </Protected>
+    ),
+  },
+  {
+    path: "/presensi/out",
+    element: (
+      <Protected>
+        <AbsenOut />
       </Protected>
     ),
   },

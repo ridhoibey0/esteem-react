@@ -50,7 +50,7 @@ const Login = () => {
       >
         <Flex
           p="3rem 0"
-          backgrounColor="background"
+          backgroundColor="background"
           display="flex"
           alignItems="center"
           justify="center"
@@ -61,12 +61,12 @@ const Login = () => {
             justifyContent="center"
             paddingBottom="2px"
           >
-            <Image src={Logo} alt="" srcset="" />
+            <Image src={Logo} alt="" srcSet="" />
           </Flex>
         </Flex>
         <Flex
           p="3rem 0"
-          backgrounColor="background"
+          backgroundColor="background"
           display="flex"
           alignItems="center"
           justify="center"
@@ -77,7 +77,7 @@ const Login = () => {
             justifyContent="center"
             paddingBottom="2px"
           >
-            <Image src={Main} alt="" srcset="" />
+            <Image src={Main} alt="" srcSet="" />
           </Flex>
         </Flex>
         <Flex
@@ -88,7 +88,6 @@ const Login = () => {
         >
           <form onSubmit={handleLogin} style={{ width: "90%" }}>
             <FormControl
-              id="form_Form"
               display="grid"
               rowGap="24px"
               margin="0px 24px"

@@ -1,15 +1,26 @@
-import { RiAlarmFill, RiListUnordered, RiUser3Fill } from "react-icons/ri";
-import React from "react";
-import { Box, Icon, Text, Flex, Image } from "@chakra-ui/react";
+import {
+  RiAlarmFill,
+  RiCamera2Fill,
+  RiHistoryFill,
+  RiListUnordered,
+  RiUser3Fill,
+} from "react-icons/ri";
+import React, { useRef } from "react";
+import { Box, Icon, Text, Flex, Image, Input } from "@chakra-ui/react";
 import "@/assets/style.css";
-import { Link } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 export const Navbar = () => {
+  const fileInputRef = useRef();
+  function isActive(path) {
+    const location = useLocation();
+    return location.pathname === path;
+  }
   return (
     <Flex
       className="nav"
       display="flex"
-      justify="space-between"
+      justify="space-around"
       backgroundColor="background"
       fontWeight="700"
       fontSize="sm"
@@ -20,34 +31,89 @@ export const Navbar = () => {
       bottom="0"
       textAlign="center"
       boxShadow="0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+      p="12px"
     >
-      <Box margin="0px 40px" justifyContent="space-between">
-        <Link
+      <Box>
+        <NavLink
+          exact
           to="/"
-          textDecorationLine="none"
-          borderTop="2px solid primary"
           padding="0.5rem 0"
+          className={isActive("/") ? "active" : ""}
+          style={{ fontWeight: "bold" }}
         >
           <Icon as={RiAlarmFill} boxSize="20px" lineHeight="0" />
           <Text>Presensi</Text>
-        </Link>
+        </NavLink>
       </Box>
-      <Box margin="0px 40px">
-        <Link to="/rekap" textDecoration="none" padding="0.5rem 0">
+      <Box marginRight="100px">
+        <NavLink
+          to="/history"
+          textDecoration="none"
+          padding="0.5rem 0"
+          className={isActive("/history") ? "active" : ""}
+        >
+          <Icon as={RiHistoryFill} boxSize="20px" lineHeight="0" />
+          <Text>History</Text>
+        </NavLink>
+      </Box>
+      <Box
+        backgroundColor="primary"
+        width="100px"
+        height="75px"
+        top="-15px"
+        rounded="lg"
+        pos="absolute"
+      >
+        <Flex
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          height="100%"
+          onClick={() => fileInputRef.current.click()}
+        >
+          <Icon
+            as={RiCamera2Fill}
+            boxSize="20px"
+            lineHeight="0"
+            cursor="pointer"
+          />
+          <Text>Presensi</Text>
+          <Input
+            w="100%"
+            height="100%"
+            opacity="0"
+            type="file"
+            accept="image/*"
+            capture="environment"
+            ref={fileInputRef}
+            pos="absolute"
+            top="0"
+            left="0"
+            zIndex="-1"
+          />
+        </Flex>
+      </Box>
+      <Box>
+        <NavLink
+          to="/rekap"
+          textDecoration="none"
+          padding="0.5rem 0"
+          className={isActive("/rekap") ? "active" : ""}
+        >
           <Icon as={RiListUnordered} boxSize="20px" lineHeight="0" />
           <Text>Rekap</Text>
-        </Link>
+        </NavLink>
       </Box>
-      <Box margin="0px 40px">
-        <Link
+      <Box>
+        <NavLink
           to="/profile"
           textDecoration="none"
-          _active={{ color: "primary" }}
+          className={isActive("/profile") ? "active" : ""}
           padding="0.5rem 0"
         >
           <Icon as={RiUser3Fill} boxSize="20px" lineHeight="0" />
           <Text>Profile</Text>
-        </Link>
+        </NavLink>
       </Box>
     </Flex>
   );

@@ -12,33 +12,25 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { BiArrowBack } from "react-icons/Bi";
-import { RiFileTextFill } from "react-icons/ri";
 import { Times } from "@/components/Times";
 import { NavLink } from "react-router-dom";
 import Presensi from "@/assets/img/Presensi.png";
 import useUserStore from "@/store/userStore";
-import { attendanceIn } from "@/services";
+import { attendanceOut } from "@/services";
 
-const Absen = () => {
+const AbsenOut = () => {
   const distance = useUserStore((state) => state.distance);
-  const [keterangan, setKeterangan] = useState("");
   const fileInputRef = useRef();
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const data = {
+      file: fileInputRef.current.files[0],
+    };
     try {
-      const data = {
-        file: fileInputRef.current.files[0],
-        keterangan: keterangan,
-        status: "Tepat Waktu",
-      };
-      const response = await attendanceIn(data);
-      console.log(response.data.message);
-      alert("berhasil absen", response.data.message);
-      console.log(data);
+      const response = await attendanceOut(data);
+      console.log(response);
     } catch (error) {
       console.log(error);
-      alert(error);
     }
   };
   return (
@@ -62,13 +54,6 @@ const Absen = () => {
         <form onSubmit={handleSubmit}>
           <FormControl>
             <Flex flexDir="column" className="content" m="0 24px" gap="24px">
-              <Select
-                placeholder="Keterangan"
-                onChange={(e) => setKeterangan(e.target.value)}
-              >
-                <option value="Sakit">Sakit</option>
-                <option value="Izin">Izin</option>
-              </Select>
               <Flex
                 bgColor="primary"
                 className="hadir"
@@ -110,11 +95,7 @@ const Absen = () => {
               </Flex>
             </Flex>
             <Flex m="24px 24px">
-              {distance <= 100 ? (
-                <Button type="submit">Kirim</Button>
-              ) : (
-                <Button isDisabled>Kirim</Button>
-              )}
+              <Button type="submit">Kirim</Button>
             </Flex>
           </FormControl>
         </form>
@@ -173,4 +154,4 @@ const Absen = () => {
   );
 };
 
-export default Absen;
+export default AbsenOut;

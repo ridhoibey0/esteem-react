@@ -45,7 +45,7 @@ const Profile = () => {
             {user ? (
               <>
                 <Image
-                  src={user.image}
+                  src={user.foto}
                   alt=""
                   margin="auto"
                   mb="16px"

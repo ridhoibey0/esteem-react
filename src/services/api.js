@@ -1,7 +1,7 @@
 import axios from "./axios";
 
 export const getUser = () => {
-  return axios.get("/user", {
+  return axios.get("/siswa/profile", {
     headers: {
       token: localStorage.getItem("token"),
     },
@@ -9,7 +9,7 @@ export const getUser = () => {
 };
 
 export const getAttendance = () => {
-  return axios.get("/attendance/history", {
+  return axios.get("/kehadiran/history", {
     headers: {
       token: localStorage.getItem("token"),
     },
@@ -17,8 +17,18 @@ export const getAttendance = () => {
 };
 
 export const attendanceIn = (formData) => {
-  console.log(formData);
-  return axios.post("/attendance/in", formData, {
+  return axios.post("/kehadiran", formData, {
+    mode: "no-cors",
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      token: localStorage.token,
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
+export const attendanceOut = (formData) => {
+  return axios.post("/attendance/out", formData, {
     mode: "no-cors",
     headers: {
       "Access-Control-Allow-Origin": "*",

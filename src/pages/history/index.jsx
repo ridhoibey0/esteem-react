@@ -8,6 +8,7 @@ import { IoIosRemove } from "react-icons/Io";
 import { formatDate } from "@/utils/formatDate";
 import useHistoryStore from "@/store/userHistory";
 import { getAttendance } from "@/services";
+import { formatTime } from "@/utils/formatTime";
 
 const History = () => {
   const [history, setHistory] = useState([]);
@@ -29,8 +30,8 @@ const History = () => {
         position="relative"
       >
         <Flex margin="0px 24px" padding="42px 0px" alignItems="center">
-          <Link to="/" boxSize="16px">
-            <Icon as={BiArrowBack} boxSize="16px" />
+          <Link to="/">
+            <Icon as={BiArrowBack} />
           </Link>
           <Heading fontSize="lg" fontWeight="700" ml="28px">
             History Presensi
@@ -42,6 +43,7 @@ const History = () => {
           ) : (
             history.map((ul) => (
               <Box
+                key={ul.id}
                 borderRadius="20px"
                 mb="2rem"
                 display="grid"
@@ -78,7 +80,7 @@ const History = () => {
                       fontSize="md"
                       fontWeight="700"
                     >
-                      {ul.waktu_masuk}
+                      {formatTime(ul.jam_masuk)}
                     </Text>
                     <Text fontSize="md" color="textDark">
                       {ul.status}
@@ -109,8 +111,8 @@ const History = () => {
                       fontSize="md"
                       fontWeight="700"
                     >
-                      {ul.waktu_pulang !== null ? (
-                        ul.waktu_pulang
+                      {ul.jam_pulang !== null ? (
+                        ul.jam_pulang
                       ) : (
                         <Icon
                           as={IoIosRemove}
@@ -123,7 +125,7 @@ const History = () => {
                       )}
                     </Text>
                     <Text fontSize="md" color="textDark">
-                      {ul.waktu_pulang == null
+                      {ul.jam_pulang == null
                         ? "Belum Absen Pulang"
                         : "Sudah absen pulang"}
                     </Text>

@@ -1,16 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { Box, Flex, Text, Image, Divider, Skeleton } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Text,
+  Image,
+  Divider,
+  Skeleton,
+  Tab,
+  TabList,
+  TabPanels,
+  TabPanel,
+  Tabs,
+} from "@chakra-ui/react";
 
 import { Header } from "@/components/Header";
 import { Navbar } from "@/components/Navbar";
 
-import Rekaps from "@/assets/img/rekap.png";
 import Calendar from "@/assets/img/calendar.svg";
 import Clock from "@/assets/img/clock.svg";
 import Clock2 from "@/assets/img/clock2.svg";
 import { getAttendance } from "@/services";
 import { formatDate } from "@/utils/formatDate";
-import useHistoryStore from "@/store/userHistory";
+import { formatTime } from "@/utils/formatTime";
 
 const Rekap = () => {
   const [rekap, setRekap] = useState([]);
@@ -21,8 +32,9 @@ const Rekap = () => {
     };
     fetchData();
   }, [getAttendance]);
+
   return (
-    <Box bgColor="secondary" fontFamily="mukta">
+    <Box bgColor="secondary" fontFamily="mukta" overflow="hidden">
       <Box
         maxW="540px"
         minH="100vh"
@@ -32,113 +44,167 @@ const Rekap = () => {
       >
         <Header />
         <Box margin="0 24px" mt="40px">
-          {rekap.length === 0 ? (
-            <Skeleton height="115px" borderRadius="20px" />
-          ) : (
-            rekap.map((ul, li) => (
-              <>
-                <Box
-                  key={ul.id}
-                  display="grid"
-                  gridTemplateColumns="56px 60% 40%"
-                  alignItems="center"
-                  justifyContent="flex-start"
-                >
-                  <Flex>
-                    <Image
-                      src={ul.image_masuk}
-                      alt=""
-                      width="56px"
-                      height="56px"
-                    />
-                  </Flex>
-                  <Flex
-                    display="grid"
-                    gridTemplateColumns="100%"
-                    gap="8px"
-                    ml="1rem"
-                  >
-                    <Flex display="flex" alignItems="center">
-                      <Image src={Calendar} alt="" width="16px" height="16px" />
-                      <Text fontSize="sm" margin="0" ml="8px">
-                        {formatDate(ul.tanggal_masuk)}
-                      </Text>
-                    </Flex>
-                    <Flex
-                      display="flex"
-                      alignItems="center"
-                      color="primary"
-                      fontWeight="700"
-                    >
-                      <Image src={Clock} alt="" width="16px" height="16px" />
-                      <Text fontSize="sm" margin="0" ml="8px">
-                        {/* {ul.ket} */}
-                        Hadir
-                      </Text>
-                    </Flex>
-                  </Flex>
-                  <Flex>
-                    <Image src={Clock2} alt="" width="16px" height="16px" />
-                    <Text fontSize="sm" margin="0" ml="8px">
-                      {ul.waktu_masuk}
-                    </Text>
-                  </Flex>
-                  <Divider orientation="horizontal" mt="20px" mb="20px" />
-                </Box>
-                {ul.waktu_pulang === null ? (
-                  ""
+          <Tabs variant="unstyled">
+            <TabList mb="1.5rem">
+              <Tab
+                _selected={{ color: "white", background: "#BF080A" }}
+                borderRadius="8px 0 0 8px"
+                w="full"
+                background="#EFEFEF"
+              >
+                Rekap Masuk
+              </Tab>
+              <Tab
+                _selected={{ color: "white", background: "#BF080A" }}
+                borderRadius="0 8px 8px 0"
+                w="full"
+                background="#EFEFEF"
+              >
+                Rekap Pulang
+              </Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel>
+                {rekap.length === 0 ? (
+                  <Skeleton height="115px" borderRadius="20px" />
                 ) : (
-                  <Box
-                    display="grid"
-                    gridTemplateColumns="56px 60% 40%"
-                    alignItems="center"
-                    justifyContent="flex-start"
-                  >
-                    <Flex>
-                      <Image src={ul.image} alt="" width="56px" height="56px" />
-                    </Flex>
-                    <Flex
+                  rekap.map((ul, li) => (
+                    <Box
+                      key={ul.id}
                       display="grid"
-                      gridTemplateColumns="100%"
-                      gap="8px"
-                      ml="1rem"
+                      gridTemplateColumns="56px 60% 40%"
+                      alignItems="center"
+                      justifyContent="flex-start"
                     >
-                      <Flex display="flex" alignItems="center">
+                      <Flex>
                         <Image
-                          src={Calendar}
+                          src={ul.foto}
                           alt=""
-                          width="16px"
-                          height="16px"
+                          width="56px"
+                          height="56px"
                         />
-                        <Text fontSize="sm" margin="0" ml="8px">
-                          {formatDate(ul.tanggal_pulang)}
-                        </Text>
                       </Flex>
                       <Flex
-                        display="flex"
-                        alignItems="center"
-                        color="primary"
-                        fontWeight="700"
+                        display="grid"
+                        gridTemplateColumns="100%"
+                        gap="8px"
+                        ml="1rem"
                       >
-                        <Image src={Clock} alt="" width="16px" height="16px" />
+                        <Flex display="flex" alignItems="center">
+                          <Image
+                            src={Calendar}
+                            alt=""
+                            width="16px"
+                            height="16px"
+                          />
+                          <Text fontSize="sm" margin="0" ml="8px">
+                            {formatDate(ul.tanggal_masuk)}
+                          </Text>
+                        </Flex>
+                        <Flex
+                          display="flex"
+                          alignItems="center"
+                          color="primary"
+                          fontWeight="700"
+                        >
+                          <Image
+                            src={Clock}
+                            alt=""
+                            width="16px"
+                            height="16px"
+                          />
+                          <Text fontSize="sm" margin="0" ml="8px">
+                            {/* {ul.ket} */}
+                            Hadir
+                          </Text>
+                        </Flex>
+                      </Flex>
+                      <Flex>
+                        <Image src={Clock2} alt="" width="16px" height="16px" />
                         <Text fontSize="sm" margin="0" ml="8px">
-                          {/* {ul.ket} */}
-                          Pulang
+                          {formatTime(ul.jam_masuk)}
                         </Text>
                       </Flex>
-                    </Flex>
-                    <Flex>
-                      <Image src={Clock2} alt="" width="16px" height="16px" />
-                      <Text fontSize="sm" margin="0" ml="8px">
-                        {ul.waktu_pulang}
-                      </Text>
-                    </Flex>
-                    <Divider orientation="horizontal" mt="20px" mb="20px" />
-                  </Box>
+                      <Divider orientation="horizontal" mt="20px" mb="20px" />
+                    </Box>
+                  ))
                 )}
-              </>
-            ))
-          )}
+              </TabPanel>
+              <TabPanel>
+                {rekap.map((item) => (
+                  <React.Fragment key={item.id}>
+                    {item.jam_pulang ? (
+                      <Box
+                        key={item.id}
+                        display="grid"
+                        gridTemplateColumns="56px 60% 40%"
+                        alignItems="center"
+                        justifyContent="flex-start"
+                      >
+                        <Flex>
+                          <Image
+                            src={item.foto_pulang}
+                            alt=""
+                            width="56px"
+                            height="56px"
+                          />
+                        </Flex>
+                        <Flex
+                          display="grid"
+                          gridTemplateColumns="100%"
+                          gap="8px"
+                          ml="1rem"
+                        >
+                          <Flex display="flex" alignItems="center">
+                            <Image
+                              src={Calendar}
+                              alt=""
+                              width="16px"
+                              height="16px"
+                            />
+                            <Text fontSize="sm" margin="0" ml="8px">
+                              {formatDate(item.tanggal_masuk)}
+                            </Text>
+                          </Flex>
+                          <Flex
+                            display="flex"
+                            alignItems="center"
+                            color="primary"
+                            fontWeight="700"
+                          >
+                            <Image
+                              src={Clock}
+                              alt=""
+                              width="16px"
+                              height="16px"
+                            />
+                            <Text fontSize="sm" margin="0" ml="8px">
+                              {/* {item.ket} */}
+                              Hadir
+                            </Text>
+                          </Flex>
+                        </Flex>
+                        <Flex>
+                          <Image
+                            src={Clock2}
+                            alt=""
+                            width="16px"
+                            height="16px"
+                          />
+                          <Text fontSize="sm" margin="0" ml="8px">
+                            {formatTime(item.jam_pulang)}
+                          </Text>
+                        </Flex>
+                        <Divider orientation="horizontal" mt="20px" mb="20px" />
+                      </Box>
+                    ) : (
+                      ""
+                    )}
+                  </React.Fragment>
+                ))}
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
         </Box>
         <Navbar />
       </Box>

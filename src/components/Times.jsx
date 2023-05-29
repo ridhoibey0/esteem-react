@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Flex, Image, Text, Icon } from "@chakra-ui/react";
 import { HiClock, HiMapPin } from "react-icons/hi2";
 import { getDistance } from "geolib";
+import useUserStore from "@/store/userStore";
 
 export const Times = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
-
+  const setDistance = useUserStore((state) => state.setDistance);
+  const distance = useUserStore((state) => state.distance);
   useEffect(() => {
     const timer = setTimeout(() => {
       setCurrentTime(new Date());
@@ -41,8 +43,8 @@ export const Times = () => {
   }, []);
 
   const day = currentTime.getDay();
-  const hours = set(currentTime.getHours());
-  const minute = set(currentTime.getMinutes());
+  const hours = setLeadingZero(currentTime.getHours());
+  const minute = setLeadingZero(currentTime.getMinutes());
   const myDay = [
     "Minggu",
     "Senin",
@@ -53,24 +55,26 @@ export const Times = () => {
     "Sabtu",
   ];
 
-  function set(e) {
+  function setLeadingZero(e) {
     e = e < 10 ? "0" + e : e;
     return e;
   }
+  useEffect(() => {
+    const distance = getDistance(
+      {
+        latitude: parseFloat(latitude),
+        longitude: parseFloat(longitude),
+      },
+      {
+        latitude: -6.8979622,
+        longitude: 107.6242252,
+      }
+    );
 
-  const distance = getDistance(
-    {
-      latitude: parseFloat(latitude),
-      longitude: parseFloat(longitude),
-    },
-    {
-      latitude: -6.8979622,
-      longitude: 107.6242252,
-    }
-  );
+    setDistance(distance);
+  }, [latitude, longitude, setDistance]);
 
   const maxDistance = 100;
-
   return (
     <Flex
       margin="34px 24px"
