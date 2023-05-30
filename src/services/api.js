@@ -28,8 +28,7 @@ export const attendanceIn = (formData) => {
 };
 
 export const attendanceOut = (formData) => {
-  return axios.post("/attendance/out", formData, {
-    mode: "no-cors",
+  return axios.put("/kehadiran", formData, {
     headers: {
       "Access-Control-Allow-Origin": "*",
       token: localStorage.token,

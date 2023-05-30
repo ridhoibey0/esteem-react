@@ -24,7 +24,7 @@ const Home = () => {
   const setUser = useUserStore((state) => state.setUser);
   const user = useUserStore((state) => state.user);
   const [historyAttendence, setHistory] = useState([]);
-  const [currentTime, setCurrentTime] = useState(new Date());
+  const [currentTime, setCurrentTime] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,13 +41,6 @@ const Home = () => {
     };
     fetchData();
   }, [getUser]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, [currentTime]);
 
   return (
     <Box bgColor="secondary" fontFamily="mukta" overflow="hidden">
@@ -103,7 +96,7 @@ const Home = () => {
             justify="space-between"
             display="flex"
           >
-            <VStack>
+            {/* <VStack>
               {currentTime.getHours() <= 9 && currentTime.getHours() >= 6 ? (
                 <Link to="/presensi">
                   <Flex
@@ -150,7 +143,7 @@ const Home = () => {
                 </Flex>
               )}
               <Text fontSize="md">Presensi Pulang</Text>
-            </VStack>
+            </VStack> */}
           </Flex>
           <Box
             padding="0px 24px"

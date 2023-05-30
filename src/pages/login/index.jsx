@@ -102,11 +102,11 @@ const Login = () => {
                 ""
               )}
               <Box>
-                <FormLabel>Nis</FormLabel>
+                <FormLabel>NIS</FormLabel>
                 <Input
                   className="Input"
                   type="number"
-                  placeholder="Masukan nis"
+                  placeholder="Masukan NIS"
                   width="100%"
                   background="#FFFFFF"
                   border="1px solid #CCCCCC"
