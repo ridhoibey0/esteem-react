@@ -79,17 +79,6 @@ const Profile = () => {
               alignItems="center"
               borderBottom="1px solid black"
             >
-              <Icon as={MdEdit} boxSize="20px" color="primary" />
-              <Text ml="32px" fontWeight="700">
-                Edit Profil
-              </Text>
-            </Flex>
-            <Flex
-              display="flex"
-              padding="10px 0"
-              alignItems="center"
-              borderBottom="1px solid black"
-            >
               <Icon as={AiFillQuestionCircle} boxSize="20px" color="primary" />
               <Text ml="32px" fontWeight="700">
                 Tentang Kami

@@ -27,42 +27,42 @@ export const Navbar = () => {
       const data = {
         file: fileInputRef.current.files[0],
       };
-      const response = await attendanceIn(data);
-      toast.success(response.data.message, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-      // if (new Date().getHours() <= 9) {
-      //   const response = await attendanceIn(data);
-      //   toast.success(response.data.message, {
-      //     position: "top-center",
-      //     autoClose: 5000,
-      //     hideProgressBar: false,
-      //     closeOnClick: true,
-      //     pauseOnHover: true,
-      //     draggable: true,
-      //     progress: undefined,
-      //     theme: "light",
-      //   });
-      // } else if (new Date().getHours() >= 16 && new Date().getHours() <= 21) {
-      //   const response = await attendanceOut(data);
-      //   toast.success(response.data.message, {
-      //     position: "top-center",
-      //     autoClose: 5000,
-      //     hideProgressBar: false,
-      //     closeOnClick: true,
-      //     pauseOnHover: true,
-      //     draggable: true,
-      //     progress: undefined,
-      //     theme: "light",
-      //   });
-      // }
+      // const response = await attendanceIn(data);
+      // toast.success(response.data.message, {
+      //   position: "top-center",
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "light",
+      // });
+      if (new Date().getHours() <= 9) {
+        const response = await attendanceIn(data);
+        toast.success(response.data.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else if (new Date().getHours() >= 16 && new Date().getHours() <= 21) {
+        const response = await attendanceOut(data);
+        toast.success(response.data.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
       console.log(data);
     } catch (error) {
       toast.error(error.response.data.message, {
